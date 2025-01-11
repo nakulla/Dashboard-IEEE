@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-satoshi font-normal text-base text-body bg-whiten relative z-1;
+  }
+}
+
+@layer components {
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .chat-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+  .inbox-height {
+    @apply h-[calc(100vh_-_8.125rem)] lg:h-[calc(100vh_-_5.625rem)];
+  }
+}
+
+/* third-party libraries CSS */
+
+[x-cloak] {
+  display: none !important;
+}
+/* Custom Quill Toolbar Styles */
+.ql-toolbar {
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.ql-toolbar .ql-formats {
+  display: flex;
+  gap: 8px;
+}
+
+.ql-toolbar button {
+  background: transparent;
+  border: none;
+  color: #4e2d96; /* Gradient color */
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.ql-toolbar button:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: scale(1.1);
+}
+
+.ql-toolbar button.ql-active {
+  background-color: #c0a2fe;
+  color: white;
+}
+
+.ql-toolbar button.ql-snow {
+  color: #4e2d96;
+}
+
+.ql-toolbar button.ql-snow:hover {
+  background-color: #c0a2fe;
+  color: white;
+}
+
+.ql-toolbar .ql-picker-item:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.dark .ql-toolbar.ql-snow {
+  background-color: #2d3748 !important; /* Background gelap */
+  color: #e2e8f0 !important; /* Warna ikon */
+  border-color: #4a5568 !important; /* Border warna */
+}
+
+.dark .ql-toolbar.ql-snow .ql-picker-label,
+.dark .ql-toolbar.ql-snow .ql-picker-item {
+  color: #e2e8f0 !important; /* Warna teks dropdown */
+}
+
+.dark .ql-toolbar.ql-snow .ql-stroke {
+  stroke: #e2e8f0 !important; /* Warna ikon default */
+}
+
+.dark .ql-toolbar.ql-snow .ql-fill {
+  fill: #e2e8f0 !important; /* Warna ikon terisi */
+}
+
+.dark .ql-toolbar.ql-snow .ql-picker-item:hover,
+.dark .ql-toolbar.ql-snow .ql-picker-item.ql-selected {
+  color: #63b3ed !important; /* Warna hover pada dropdown */
+}
