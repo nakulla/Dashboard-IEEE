@@ -6,13 +6,16 @@ import Login from './pages/Authentication/Login.tsx';
 import Register from './pages/Authentication/Register.tsx';
 import AchievmentPage from './pages/AchievmentPage/Achievment';
 import NewsPage from './pages/NewsPage/News';
+import FaqPage from './pages/FaqPage/FaqPage.tsx';
 import RecentActivitiesPage from './pages/RecentActivitiesPage/Activities';
 import AddActivityPage from './pages/AddActivityPage/Add';
 import AddAchievmentPage from './pages/AddAchievmentPage/Achiv';
 import AddNewsPage from './pages/AddNewsPage/Addnews';
+import AddFaqPage from './pages/AddFaqPage/AddFaqPage.tsx'
 import EditActivityPage from './pages/EditActivityPage/Edit';
 import EditNewsPage from './pages/EditNewsPage/Edit';
 import EditAchievmentPage from './pages/EditAchievmentPage/Edit.tsx';
+import EditFaqPage from './pages/EditFaqPage/EditFaqPage.tsx'
 import Settings from './pages/Settings.tsx';
 import LogPage from './pages/LogPage/log';
 import DefaultLayout from './layout/DefaultLayout';
@@ -53,6 +56,15 @@ function App() {
               <>
                 <PageTitle title="News | IEEE Dashboard Admin" />
                 <NewsPage />
+              </>
+            }
+          />
+          <Route
+            path="/faq"
+            element={
+              <>
+                <PageTitle title="FAQ | IEEE Dashboard Admin" />
+                <FaqPage />
               </>
             }
           />
@@ -102,6 +114,15 @@ function App() {
             }
           />
           <Route
+            path="/add-faq"
+            element={
+              <>
+                <PageTitle title="Add New News | IEEE Dashboard Admin" />
+                <AddFaqPage />
+              </>
+            }
+          />
+          <Route
             path="/edit-activity/:id"
             element={
               <>
@@ -125,6 +146,15 @@ function App() {
               <>
                 <PageTitle title="Edit Achievment | IEEE Dashboard Admin" />
                 <EditAchievmentPage />
+              </>
+            }
+          />
+          <Route
+            path="/edit-faq/:id"
+            element={
+              <>
+                <PageTitle title="Edit Achievment | IEEE Dashboard Admin" />
+                <EditFaqPage />
               </>
             }
           />
