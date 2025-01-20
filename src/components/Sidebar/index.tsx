@@ -168,7 +168,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                 </NavLink>
               </li>
               
-              {/* <!-- Menu Item Recent Activities --> */}
+              {/* <!-- Menu Item FAQ --> */}
               <li>
                 <NavLink
                   to="/faq"
@@ -187,6 +187,28 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }: SidebarProps) => {
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1c1.38 0 2.5 1.12 2.5 2.5 0 .88-.71 1.66-1.5 1.93V13h-2v-1h1v-.57c.59-.21 1-.76 1-1.43 0-.83-.67-1.5-1.5-1.5h-1v-2zm1 10h-2v-2h2v2z" />
                   </svg>
                   FAQ
+                </NavLink>
+              </li>
+             
+              {/* <!-- Menu Item Recycle Bin --> */}
+              <li>
+                <NavLink
+                  to="/trash"
+                  className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
+                    pathname.includes('faq') &&
+                    'bg-graydark dark:bg-meta-4'
+                  }`}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                  >
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-.5-13h1c1.38 0 2.5 1.12 2.5 2.5 0 .88-.71 1.66-1.5 1.93V13h-2v-1h1v-.57c.59-.21 1-.76 1-1.43 0-.83-.67-1.5-1.5-1.5h-1v-2zm1 10h-2v-2h2v2z" />
+                  </svg>
+                  Recycle Bin
                 </NavLink>
               </li>
 

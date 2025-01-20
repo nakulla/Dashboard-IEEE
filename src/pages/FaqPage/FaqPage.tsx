@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaPen, FaTrash, FaPlus, FaChevronLeft, FaChevronRight, FaSort } from 'react-icons/fa';
+import { FaPen, FaTrash, FaPlus, FaChevronLeft, FaChevronRight, FaSort, FaRecycle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from 'sweetalert2';
@@ -8,7 +8,7 @@ import Breadcrumb from '../../components/Breadcrumbs/Breadcrumb';
 
 interface FAQ {
   id: number;
-  name: string; // Add the name field
+  name: string;
   question: string;
   answer: string;
   picture: string;
@@ -24,8 +24,18 @@ const saveFAQToLocalStorage = (faq: FAQ[]) => {
   localStorage.setItem('faq', JSON.stringify(faq));
 };
 
+const getRecycleBinFromLocalStorage = (): FAQ[] => {
+  const storedRecycleBin = localStorage.getItem('recycleBin');
+  return storedRecycleBin ? JSON.parse(storedRecycleBin) : [];
+};
+
+const saveRecycleBinToLocalStorage = (recycleBin: FAQ[]) => {
+  localStorage.setItem('recycleBin', JSON.stringify(recycleBin));
+};
+
 const FAQPage: React.FC = () => {
   const [faq, setFAQ] = useState<FAQ[]>([]);
+  const [recycleBin, setRecycleBin] = useState<FAQ[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(5);
@@ -33,6 +43,7 @@ const FAQPage: React.FC = () => {
 
   useEffect(() => {
     setFAQ(getFAQFromLocalStorage());
+    setRecycleBin(getRecycleBinFromLocalStorage());
   }, []);
 
   const filteredFAQ = faq.filter((faqItem) =>
@@ -60,20 +71,27 @@ const FAQPage: React.FC = () => {
   };
 
   const deleteFAQ = (id: number) => {
-    // Show SweetAlert confirmation
     Swal.fire({
       title: 'Are you sure?',
-      text: 'Do you really want to delete this FAQ?',
+      text: 'Do you want to move this FAQ to Recycle Bin?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonText: 'Yes, move it!',
       cancelButtonText: 'Cancel',
     }).then((result) => {
       if (result.isConfirmed) {
-        const updatedFAQ = faq.filter((faqItem) => faqItem.id !== id);
-        setFAQ(updatedFAQ);
-        saveFAQToLocalStorage(updatedFAQ);
-        toast.success('FAQ deleted successfully!');
+        const deletedItem = faq.find((faqItem) => faqItem.id === id);
+        if (deletedItem) {
+          const updatedFAQ = faq.filter((faqItem) => faqItem.id !== id);
+          setFAQ(updatedFAQ);
+          saveFAQToLocalStorage(updatedFAQ);
+
+          const updatedRecycleBin = [...recycleBin, deletedItem];
+          setRecycleBin(updatedRecycleBin);
+          saveRecycleBinToLocalStorage(updatedRecycleBin);
+
+          toast.success('FAQ moved to Recycle Bin!');
+        }
       }
     });
   };
@@ -92,6 +110,15 @@ const FAQPage: React.FC = () => {
         >
           <FaPlus className="mr-2" /> ADD FAQ
         </Link>
+        <Link
+          to="/trash"
+          className="flex items-center text-white rounded-full px-4 py-2 transition-all transform hover:scale-105 hover:shadow-lg"
+          style={{
+            background: 'linear-gradient(45deg, #FEA092, #C04E4E)',
+          }}
+        >
+          <FaRecycle className="mr-2" /> RECYCLE BIN
+        </Link>
       </div>
 
       <input
@@ -107,7 +134,7 @@ const FAQPage: React.FC = () => {
           <thead>
             <tr>
               <th className="py-3 px-6 text-left text-sm font-medium text-gray-500 dark:text-gray-300">ID</th>
-              <th className="py-3 px-6 text-left text-sm font-medium text-gray-500 dark:text-gray-300">NAME</th> {/* Add Name column */}
+              <th className="py-3 px-6 text-left text-sm font-medium text-gray-500 dark:text-gray-300">NAME</th>
               <th className="py-3 px-6 text-left text-sm font-medium text-gray-500 dark:text-gray-300">
                 <span>QUESTION</span>
                 <button className="ml-2 text-gray-500 dark:text-gray-300" onClick={toggleSortOrder}>
@@ -127,7 +154,7 @@ const FAQPage: React.FC = () => {
                 className="border-b border-gray-200 hover:bg-gray-50 dark:border-gray-700 dark:hover:bg-gray-700 transition"
               >
                 <td className="py-3 px-6">{index + 1}</td>
-                <td className="py-3 px-6 text-gray-900 dark:text-white">{faqItem.name}</td> {/* Display Name */}
+                <td className="py-3 px-6 text-gray-900 dark:text-white">{faqItem.name}</td>
                 <td className="py-3 px-6 text-gray-900 dark:text-white">{faqItem.question}</td>
                 <td className="py-3 px-6 text-gray-900 dark:text-white">{faqItem.answer}</td>
                 <td className="py-3 px-6 text-gray-900 dark:text-white">
@@ -194,4 +221,4 @@ const FAQPage: React.FC = () => {
   );
 };
 
-export default FAQPage;
+export default FAQPage

@@ -20,6 +20,7 @@ import Settings from './pages/Settings.tsx';
 import LogPage from './pages/LogPage/log';
 import DefaultLayout from './layout/DefaultLayout';
 import { UserProvider } from './components/Dropdowns/UserContext.tsx'; 
+import RecycleBinPage from './pages/TrashPage/RecycleBinPage.tsx';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -83,6 +84,15 @@ function App() {
               <>
                 <PageTitle title="Recent Activities | IEEE Dashboard Admin" />
                 <RecentActivitiesPage />
+              </>
+            }
+          />
+          <Route
+            path="/trash"
+            element={
+              <>
+                <PageTitle title="Recycle Bin | IEEE Dashboard Admin" />
+                <RecycleBinPage />
               </>
             }
           />
